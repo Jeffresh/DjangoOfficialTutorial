@@ -6,6 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
+#i dont know what is this folder
+.idea/
+
 # Distribution / packaging
 .Python
 build/
@@ -102,3 +105,11 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+*.pyc
+*~
+__pycache__
+
+db.sqlite3
+/static
+.DS_Store
