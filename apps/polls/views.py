@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
+from django.db.models import F
 from .models import Question, Choice
 
 
@@ -38,7 +39,8 @@ def vote(request, question_id):
         context = {'question': question, 'error_message': "You didn't select a choice."}
         return render(request, 'polls/detail.html', context)
     else:
-        selected_choice.votes += 1
+        # selected_choice.votes += 1
+        selected_choice.votes = F('votes') + 1  # avoiding race conditions
         selected_choice.save()
 
         # Always return a HttpResponseRedirect after successfully dealing
