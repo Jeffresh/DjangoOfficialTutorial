@@ -14,7 +14,7 @@ from .models import Question
 class QuestionModelTests(TestCase):
 
     def test_was_published_recently_with_future_question(self):
-        """"
+        """
         was_published_recently() returns False for questions
         whose pub_date
         is in  the future.
@@ -25,7 +25,7 @@ class QuestionModelTests(TestCase):
         self.assertIs(future_question.was_published_recently(), False)
 
     def test_was_published_recently_with_old_question(self):
-        """"
+        """
         was_published_recently() returns False for questions whose pub_date
         is older than 1 day.
         """
@@ -36,7 +36,7 @@ class QuestionModelTests(TestCase):
 
 
 def create_question(question_text, days):
-    """"
+    """
     Create a question with  the given 'question_text' and published the given number
     of 'days' offset to now (negative for questions published in the past, positive for question that have yet
     to be published).
@@ -47,7 +47,7 @@ def create_question(question_text, days):
 
 class QuestionIndexViewTest(TestCase):
     def test_no_question(self):
-        """"
+        """
         if no question exist, an appropiate message is displayed
         """
         response = self.client.get(reverse('polls:index'))
@@ -66,7 +66,7 @@ class QuestionIndexViewTest(TestCase):
                                  )
 
     def test_future_question(self):
-        """"
+        """
         Question with a pub_date in the future aren't displayed
         on the index page
         """
@@ -78,7 +78,7 @@ class QuestionIndexViewTest(TestCase):
         self.assertQuerysetEqual(response.context['latest_question_list'], [])
 
     def test_future_question_and_past_question(self):
-        """"
+        """
         Even if both past and future question exists, only past question
         are displayed.
         """
@@ -88,7 +88,7 @@ class QuestionIndexViewTest(TestCase):
         self.assertQuerysetEqual(response.context['latest_question_list'], ['<Question: Past_question.>'])
 
     def test_two_past_question(self):
-        """"
+        """
         The question index page may display multiple questions.
         """
         create_question(question_text="Past question 1.", days=-30)
@@ -101,7 +101,7 @@ class QuestionIndexViewTest(TestCase):
 
 class QuestionDetailViewTests(TestCase):
     def test_future_question(self):
-        """"
+        """
         The detail view of a question  with a pub_date in the future
         returns a 404 not found.
         """
@@ -112,7 +112,7 @@ class QuestionDetailViewTests(TestCase):
         self.assertEqual(response.status_code, 404)
 
     def test_past_question(self):
-        """"
+        """
         The detail view of a question with a pub_date in the past
         displays the question's text.
         """
