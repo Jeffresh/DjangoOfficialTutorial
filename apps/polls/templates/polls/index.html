@@ -1,3 +1,9 @@
+{% load static%}
+
+<link rel="stylesheet" type="text/css" href="{%static 'polls/style.css'%}">
+
+{#<script src="https://gist.github.com/Jeffresh/da34e18dd37e39c32a3b2de61b223a9e.js"></script>#}
+
 {% if latest_question_list %}
     <ul>
         {% for question in latest_question_list %}
