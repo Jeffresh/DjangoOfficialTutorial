@@ -123,4 +123,14 @@ class QuestionDetailViewTests(TestCase):
         self.assertContains(response, past_question.question_text)
 
 
+class QuestionResultViewTests(TestCase):
+    def test_future_question(self):
+        """
+        A  user cant access a future question using url.
+        """
 
+        future_question = create_question(question_text='Future Question.', days=10)
+        url = reverse('polls:results', args=(future_question.id,))
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, 404)
